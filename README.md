@@ -1,2 +1,2 @@
 # mote-project
-Sistema de gestão de conhecimento e curadoria intelectual baseado em livros e motes
+Sistema de controle pessoal de leitura baseado em "Motes": estudos e comentários adicionados ao livro para compreendê-lo melhor.
