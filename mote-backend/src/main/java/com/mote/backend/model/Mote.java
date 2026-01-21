@@ -1,5 +1,6 @@
 package com.mote.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,6 +28,7 @@ public class Mote {
     @Column(name = "theme")
     private Set<MoteTheme> themes; // Set evita temas duplicados no mesmo mote
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "library_entry_id", nullable = false)
     private LibraryEntry libraryEntry;

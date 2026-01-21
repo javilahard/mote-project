@@ -1,5 +1,6 @@
 package com.mote.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore; // <--- Importante!
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
@@ -19,8 +20,8 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // Relacionamento: Um User -> Muitas LibraryEntries
-    // "mappedBy = user" diz que quem manda na relação é o campo 'user' na outra classe
+    // Corte o ciclo aqui!
+    @JsonIgnore // <--- ADICIONE ISSO
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LibraryEntry> libraryEntries;
 }

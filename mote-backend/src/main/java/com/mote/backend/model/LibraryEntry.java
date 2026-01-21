@@ -1,5 +1,6 @@
 package com.mote.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore; // <--- Importante!
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -15,21 +16,20 @@ public class LibraryEntry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Muitos itens de estante pertencem a UM usuário
+    @JsonIgnore // <--- ADICIONE ISSO
     @ManyToOne(fetch = FetchType.LAZY) 
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // Muitos itens de estante referenciam UM livro do catálogo
-    @ManyToOne(fetch = FetchType.EAGER) // EAGER: Ao carregar a estante, já traga os dados do livro
+    // ... restante do código (book, addedAt, motes) continua igual ...
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
-    @CreationTimestamp // Preenche a data automaticamente quando salva
+    @CreationTimestamp
     @Column(name = "added_at")
     private LocalDateTime addedAt;
 
-    // Se eu apagar o item da estante, apago os Motes associados (Cascade)
     @OneToMany(mappedBy = "libraryEntry", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mote> motes;
 }
