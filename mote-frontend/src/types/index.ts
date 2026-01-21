@@ -7,6 +7,7 @@ export interface User {
 
 // Define o formato de um Livro (igual ao BookRequestDTO do Java)
 export interface Book {
+  id: number;
   isbn: string;
   title: string;
   author: string;
@@ -19,6 +20,7 @@ export interface LibraryEntry {
   user: User;
   book: Book;
   addedAt: string;
+  motes: Mote[];
 }
 
 // Define o formato de um Mote
